@@ -291,7 +291,7 @@
     openModal('transacaoModal');
   }));
 
-  // ── Checkout de venda: soma o total das receitas selecionadas ────────
+  // soma o total das receitas selecionadas 
   const checkboxesReceita = document.querySelectorAll('.checkbox-receita');
   const totalEl = document.getElementById('totalSelecionado');
   const btnConfirmar = document.getElementById('btnConfirmarVenda');

@@ -60,7 +60,7 @@ class Receita extends Model
         ][$this->status] ?? 'badge-secondary';
     }
 
-    /** Uma receita pesada ou finalizada não pode mais ser editada/excluída. */
+    // Uma receita pesada ou finalizada não pode mais ser editada/excluída
     public function estaBloqueada(): bool
     {
         return in_array($this->status, ['pesado', 'finalizado'], true);

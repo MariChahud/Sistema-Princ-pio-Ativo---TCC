@@ -22,7 +22,7 @@ class FinanceiroController extends Controller
         $entradas = Transacao::where('tipo', 'entrada')->sum('valor');
         $saidas   = Transacao::where('tipo', 'saida')->sum('valor');
 
-        // Lista para a aba "Histórico de Clientes".
+        // lista para a aba "Histórico de Clientes".
         $clientes = Cliente::withCount('receitas')->orderBy('nome')->get();
 
         // Se um cliente foi buscado para venda, carrega suas receitas "pesadas"
@@ -75,7 +75,7 @@ class FinanceiroController extends Controller
         return back()->with('sucesso', 'Transação excluída.');
     }
 
-    /** Histórico detalhado de um cliente (receitas + pagamentos). */
+    // historico do cliente
     public function historicoCliente(Cliente $cliente)
     {
         $cliente->load(['receitas' => fn ($q) => $q->orderByDesc('data')]);
@@ -85,7 +85,7 @@ class FinanceiroController extends Controller
         return view('financeiro.historico', compact('cliente', 'transacoes', 'totalGasto'));
     }
 
-    /** Busca TODAS as receitas "pesadas" (prontas para venda) de um cliente pelo CPF. */
+    // Busca TODAS as receitas "pesadas" de um cliente pelo CPF
     public function buscarVenda(Request $request)
     {
         $request->validate(['cpf' => ['required', 'string']]);
@@ -102,7 +102,7 @@ class FinanceiroController extends Controller
                 ->withInput();
         }
 
-        // Traz TODAS as receitas que já foram "pesadas" (prontas para faturar)
+        
         $receitasProntas = $cliente->receitas()
             ->with(['itens.produto', 'itens.lote'])
             ->where('status', 'pesado')
@@ -117,11 +117,7 @@ class FinanceiroController extends Controller
         return redirect()->route('financeiro.index', ['cliente_venda' => $cliente->id]);
     }
 
-    /**
-     * Confirma a venda de uma ou mais receitas selecionadas pelo usuário.
-     * Cada receita selecionada gera sua própria transação de entrada (mantendo
-     * a integridade dos relatórios), e todas ficam agrupadas na mesma nota fiscal.
-     */
+
     public function confirmarVenda(Request $request)
     {
         $dados = $request->validate([
@@ -138,8 +134,6 @@ class FinanceiroController extends Controller
             foreach ($dados['receitas'] as $receitaId) {
                 $receita = Receita::findOrFail($receitaId);
 
-                // Ignora silenciosamente receitas que não estejam mais "pesado"
-                // (ex: já vendida em outra aba/concorrência)
                 if ($receita->status !== 'pesado') {
                     continue;
                 }
@@ -165,14 +159,13 @@ class FinanceiroController extends Controller
             return back()->with('erro', 'Nenhuma das receitas selecionadas estava disponível para venda.');
         }
 
-        // Nota fiscal consolidada: primeira transação na rota, demais via query string "ids"
         return redirect()->route('financeiro.nota', [
             'transacao' => $transacoes->first()->id,
             'ids'       => $transacoes->pluck('id')->implode(','),
         ]);
     }
 
-    /** Nota fiscal / Recibo de uma venda (uma ou mais transações/receitas agrupadas). */
+    // nota fiscal - recibo da compra
     public function notaFiscal(Request $request, Transacao $transacao)
     {
         $ids = collect(explode(',', (string) $request->query('ids', $transacao->id)))

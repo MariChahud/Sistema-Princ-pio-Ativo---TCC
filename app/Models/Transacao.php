@@ -10,7 +10,7 @@ class Transacao extends Model
 {
     use HasFactory;
 
-    protected $table = 'transacoes'; // Garante que o Laravel busque a tabela correta com acento/plural adaptado
+    protected $table = 'transacoes'; 
 
     protected $fillable = [
         'tipo',           // entrada | saida

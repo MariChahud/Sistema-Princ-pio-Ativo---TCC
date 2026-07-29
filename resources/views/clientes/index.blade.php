@@ -158,7 +158,7 @@
     if (el) el.addEventListener('input', () => limparErro(inputId, erroId));
   });
 
-  // ── Validação JS ─────────────────────────────────────────────────
+  // validação js//
   clienteForm.addEventListener('submit', function(e) {
     limparTodos();
     let ok = true;
@@ -185,7 +185,7 @@
     if (!ok) e.preventDefault();
   });
 
-  // ── Abrir: Novo Cliente ──────────────────────────────────────────
+  // novo cliente 
   document.querySelectorAll('[data-cliente-novo]').forEach(btn => btn.addEventListener('click', () => {
     clienteForm.reset();
     limparTodos();
@@ -196,7 +196,7 @@
     openModal('clienteModal');
   }));
 
-  // ── Abrir: Editar Cliente ────────────────────────────────────────
+  // editar cliente
   document.querySelectorAll('[data-cliente-editar]').forEach(btn => btn.addEventListener('click', () => {
     clienteForm.reset();
     limparTodos();

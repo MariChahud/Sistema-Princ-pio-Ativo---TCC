@@ -8,12 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VerificarPerfil
 {
-    /**
-     * Garante que o usuário autenticado pode acessar o módulo informado.
-     * Substitui as funções temPermissao()/checkAuth() do antigo app.js.
-     *
-     * Uso na rota: ->middleware('perfil:produtos')
-     */
     public function handle(Request $request, Closure $next, string $modulo): Response
     {
         $user = $request->user();

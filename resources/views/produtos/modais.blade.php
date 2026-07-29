@@ -110,10 +110,8 @@
 </div>
 
 <script>
-  // mostrarErro() e limparErro() agora são globais, definidas em public/js/app.js
-  // O CSS de .field-error/.input-erro também é global, definido em public/css/styles.css
 
-  // ── PRODUTO ──────────────────────────────────────────────────────────
+  // produto
   function limparErrosProduto() {
     [['produtoNome','erroNomeProduto'],['produtoDCB','erroDCB'],
      ['produtoPreco','erroPreco'],['produtoEstoqueMin','erroEstoqueMin']]
@@ -147,7 +145,7 @@
     if (!ok) e.preventDefault();
   });
 
-  // ── LOTE ─────────────────────────────────────────────────────────────
+  // lote
   function limparErrosLote() {
     [['loteProduto','erroProdutoLote'],['loteNumero','erroNumeroLote'],
      ['loteQuantidade','erroQuantidadeLote'],['loteValidade','erroValidadeLote'],
@@ -190,7 +188,7 @@
     if (!ok) e.preventDefault();
   });
 
-  // ── Reabre modal com erro do Laravel ─────────────────────────────────
+  //  Reabre modal com erro do Laravel 
   @if ($errors->hasAny(['nome','dcb','preco_base','estoque_minimo']))
     document.addEventListener('DOMContentLoaded', () => {
       @if (old('_method') === 'PUT' && old('_produto_id'))

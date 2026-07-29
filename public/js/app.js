@@ -1,14 +1,11 @@
-// ================================
-// Princípio Ativo — JS global do layout
 // Define as funções usadas por todas as views Blade:
 //   - openModal(id) / closeModal(id)
-//   - [data-close-modal] -> fecha modal
-//   - [data-confirm]     -> confirma antes de enviar form (excluir, desativar, etc.)
-//   - [data-toggle-sidebar] -> abre/fecha sidebar no mobile
-//   - [data-tab]         -> alterna abas (ex: Produtos / Lotes)
+//   - [data-close-modal] - fecha modal
+//   - [data-confirm]     - confirma antes de enviar form 
+//   - [data-toggle-sidebar] - abre/fecha sidebar no mobile
+//   - [data-tab]         - alterna abas (ex: Produtos / Lotes)
 //   - clique fora do modal (.modal-overlay) fecha o modal
 //   - tecla ESC fecha o modal aberto
-// ================================
 
 function openModal(id) {
   const modal = document.getElementById(id);
@@ -20,9 +17,7 @@ function closeModal(id) {
   if (modal) modal.classList.remove('active');
 }
 
-// ── Helpers de validação de formulário (usados em Usuários, Clientes,
-//    Produtos/Lotes e Receitas para exibir/limpar mensagens de erro
-//    abaixo dos campos) ────────────────────────────────────────────
+// validação de formulário, exibir mensagens de erro
 function mostrarErro(inputId, erroId, msg) {
   const el = document.getElementById(inputId);
   const er = document.getElementById(erroId);
@@ -39,28 +34,28 @@ function limparErro(inputId, erroId) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Fechar modal pelo botão (X / Cancelar) ──────────────────────
+  // Fechar modal pelo botão (X / Cancelar)
   document.querySelectorAll('[data-close-modal]').forEach(btn => {
     btn.addEventListener('click', () => {
       closeModal(btn.getAttribute('data-close-modal'));
     });
   });
 
-  // ── Fechar modal clicando fora (no overlay) ─────────────────────
+  // Fechar modal clicando fora
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) overlay.classList.remove('active');
     });
   });
 
-  // ── Fechar modal ativo com ESC ───────────────────────────────────
+  // Fechar modal com ESC 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
     }
   });
 
-  // ── Confirmação antes de enviar formulários (excluir, desativar...) ─
+  // Confirmação antes de enviar formulários
   document.querySelectorAll('form[data-confirm]').forEach(form => {
     form.addEventListener('submit', (e) => {
       const msg = form.getAttribute('data-confirm') || 'Tem certeza?';
@@ -70,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Sidebar mobile (abrir/fechar) ────────────────────────────────
+  // Sidebar mobile 
   document.querySelectorAll('[data-toggle-sidebar]').forEach(btn => {
     btn.addEventListener('click', () => {
       const sidebar = document.querySelector('.sidebar');
@@ -78,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Alternância de abas genérica ([data-tab] + .tab-content) ────
+  // abas
   document.querySelectorAll('[data-tab]').forEach(tabBtn => {
     tabBtn.addEventListener('click', () => {
       document.querySelectorAll('[data-tab]').forEach(t => t.classList.remove('active'));
@@ -89,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Máscaras simples (CPF / CNPJ) para campos com data-mask ──────
+  // Máscaras de CPF / CNPJ 
   document.querySelectorAll('input[data-mask="cpf"]').forEach(input => {
     input.addEventListener('input', () => {
       let v = input.value.replace(/\D/g, '').slice(0, 11);
@@ -111,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Fecha automaticamente alertas de sucesso/erro após alguns segundos ─
+  // Fecha automaticamente alertas de sucesso/erro após alguns segundos 
   document.querySelectorAll('.alert-success').forEach(alert => {
     setTimeout(() => {
       alert.style.transition = 'opacity 0.4s';

@@ -143,7 +143,7 @@
 
 @push('scripts')
 <script>
-  // ── Alternância de Abas Produtos / Lotes ──────────────────────────
+  // mudar para abas de lotes e produtos
   document.querySelectorAll('[data-tab]').forEach(tabBtn => {
     tabBtn.addEventListener('click', () => {
       document.querySelectorAll('[data-tab]').forEach(t => t.classList.remove('active'));
@@ -154,7 +154,7 @@
     });
   });
 
-  // ── Modal de Produto ───────────────────────────────────────────────
+  // modal produto
   const produtoForm = document.getElementById('produtoForm');
   const produtoBase = "{{ url('produtos') }}";
 
@@ -184,7 +184,7 @@
     document.getElementById('produtoId').value = '';
   }));
 
-  // ── Modal de Lote ───────────────────────────────────────────────────
+  // modal lote
   document.querySelectorAll('[data-lote-novo]').forEach(b => b.addEventListener('click', () => {
     document.getElementById('loteForm').reset();
     openModal('loteModal');

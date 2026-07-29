@@ -13,7 +13,7 @@
   .tabs-bar { display:flex; border-bottom:1px solid var(--border); margin-bottom:1.5rem; }
   .search-inline { display:flex; align-items:center; gap:.5rem; border:1px solid var(--border); border-radius:var(--radius); padding:.5rem .75rem; background:var(--card); }
   .search-inline input { border:none; background:transparent; outline:none; font-size:.875rem; width:200px; }
-  /* .field-error e .input-erro agora são globais, definidos em public/css/styles.css */
+  
 </style>
 @endpush
 
@@ -226,8 +226,6 @@
   document.getElementById('receitaQtdCapsulas').addEventListener('input', calcularOrcamento);
   document.querySelectorAll('[data-add-insumo]').forEach(b => b.addEventListener('click', () => addInsumo()));
 
-  // mostrarErroReceita/limparErroReceita reaproveitam as funções globais
-  // mostrarErro/limparErro definidas em public/js/app.js
   function mostrarErroReceita(inputId, erroId, msg) {
     mostrarErro(inputId, erroId, msg);
   }
@@ -254,7 +252,7 @@
     if (el) el.addEventListener('input', () => limparErroReceita(inputId, erroId));
   });
 
-  // ── Validação antes de enviar ────────────────────────────────────────
+  //  Validação antes de enviar
   receitaForm.addEventListener('submit', function(e) {
     limparErrosReceita();
     let ok = true;
@@ -286,7 +284,7 @@
     if (!ok) e.preventDefault();
   });
 
-  // ── Abrir: Nova Receita ──────────────────────────────────────────────
+  // nova receita
   document.querySelectorAll('[data-receita-nova]').forEach(b => b.addEventListener('click', () => {
     receitaForm.reset();
     limparErrosReceita();
@@ -300,7 +298,7 @@
     openModal('receitaModal');
   }));
 
-  // ── Abrir: Editar Receita ────────────────────────────────────────────
+  // editar receita
   document.querySelectorAll('[data-receita-editar]').forEach(b => b.addEventListener('click', () => {
     if (b.disabled) return;
     const data = JSON.parse(b.dataset.payload);

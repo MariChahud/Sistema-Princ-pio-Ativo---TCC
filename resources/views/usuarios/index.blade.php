@@ -192,14 +192,13 @@
     senhaHint.style.display = 'inline';
   }
 
-  // ── CRF ────────────────────────────────────────────────────────────
+  // CRF
   function atualizarCRF() {
     const ehFarma = perfilSelect.value === 'farmaceutico';
     crfField.style.display = ehFarma ? 'block' : 'none';
   }
   perfilSelect.addEventListener('change', atualizarCRF);
 
-  // mostrarErro() e limparErro() agora são globais, definidas em public/js/app.js
   function limparTodos() {
     [['usuarioNome','erroNome'],['usuarioEmail','erroEmail'],['usuarioCPF','erroCPF'],
      ['usuarioPerfil','erroPerfil'],['usuarioCRF','erroCRF'],
@@ -216,7 +215,7 @@
     if (el) el.addEventListener('input', () => limparErro(inputId, erroId));
   });
 
-  // ── Validação JS antes de enviar ───────────────────────────────────
+  // Validação JS antes de enviar 
   usuarioForm.addEventListener('submit', function(e) {
     limparTodos();
     let ok = true;
@@ -247,7 +246,7 @@
     const senha = document.getElementById('usuarioSenha').value;
     const conf  = document.getElementById('usuarioSenhaConf').value;
 
-    // Senha obrigatória só no cadastro; na edição pode ficar em branco
+    // Senha obrigatória só no cadastro - na edição pode ficar em branco
     if (!modoEdicao && !senha) {
       mostrarErro('usuarioSenha', 'erroSenha', 'O campo Senha é obrigatório.'); ok = false;
     } else if (senha && senha.length < 6) {
@@ -259,7 +258,7 @@
     if (!ok) e.preventDefault();
   });
 
-  // ── Abrir: Novo Usuário ────────────────────────────────────────────
+  // novo usuário
   document.querySelectorAll('[data-usuario-novo]').forEach(btn => btn.addEventListener('click', () => {
     modoEdicao = false;
     usuarioForm.reset();
@@ -273,7 +272,7 @@
     openModal('usuarioModal');
   }));
 
-  // ── Abrir: Editar Usuário ──────────────────────────────────────────
+  // editar usuário
   document.querySelectorAll('[data-usuario-editar]').forEach(btn => btn.addEventListener('click', () => {
     modoEdicao = true;
     usuarioForm.reset();

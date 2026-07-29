@@ -1,4 +1,4 @@
-/* Reset e Base */
+/* base */
 * {
   margin: 0;
   padding: 0;
@@ -31,7 +31,7 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
 }
-/* Buttons */
+/* botoes */
 .btn {
   display: inline-flex;
   align-items: center;
