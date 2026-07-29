@@ -43,7 +43,6 @@
 
   {{Seção inferior dividida em 2 colunas}}
   <div class="grid-2">
-    {{-- Coluna 1: Centralização de Alertas de Segurança Farmacêutica --}}
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">Alertas</h3>
