@@ -65,14 +65,6 @@
       </div>
     </div>
 
-    {{-- Coluna 2: Histórico de Atividade / Logs --}}
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Atividade Recente</h3>
-      </div>
-      <div class="card-content">
-        <p class="empty-state"></p>
-      </div>
-    </div>
+    
   </div>
 @endsection
