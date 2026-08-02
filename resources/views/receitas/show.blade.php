@@ -67,10 +67,12 @@
           @if ($receita->status === 'aguardando_pesagem')
             <a href="{{ route('receitas.pesagem', $receita) }}" class="btn btn-primary">Iniciar Processo de Pesagem</a>
           @endif
-          <button onclick="window.print()" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:6px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
-            Imprimir Ficha
-          </button>
+          @if ($receita->status !== 'aguardando_pesagem')
+            <button onclick="window.print()" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:6px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+              Imprimir Ficha
+            </button>
+          @endif
         </div>
       </div>
     </div>
