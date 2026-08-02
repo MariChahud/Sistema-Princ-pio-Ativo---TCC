@@ -3,7 +3,7 @@
 @section('titulo', 'Dashboard')
 
 @section('conteudo')
-  {{ Cards de Indicadores}}
+    {{-- Cards de indicadores --}}
   <div class="stats-grid">
     <div class="stat-card">
       <div class="stat-header">
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  {{Seção inferior dividida em 2 colunas}}
+  {{-- Seção inferior dividida em 2 colunas --}}
   <div class="grid-2">
     <div class="card">
       <div class="card-header">
